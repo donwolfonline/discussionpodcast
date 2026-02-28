@@ -149,6 +149,7 @@ export default function Home() {
             onMouseLeave={() => setActivePillar(null)}
           >
             <div className={styles.pillarBg}>
+              <Image src="/episodes-bg.png" alt="Archive Background" fill className={styles.pillarImg} />
               <div className={styles.pillarOverlay} />
             </div>
             <div className={styles.pillarContent}>
