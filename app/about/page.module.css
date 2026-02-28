@@ -1,0 +1,228 @@
+.main {
+    min-height: 100vh;
+    background: #0a0a0a;
+    padding-top: 100px;
+    /* Offset for fixed navbar */
+    overflow: hidden;
+}
+
+.inViewSection {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.inViewVisible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== HERO ===== */
+.hero {
+    position: relative;
+    padding: 120px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 60vh;
+}
+
+.heroBg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    opacity: 0.5;
+}
+
+.ring1,
+.ring2,
+.ring3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid rgba(232, 201, 122, 0.1);
+}
+
+.ring1 {
+    width: 600px;
+    height: 600px;
+    animation: pulseRotate 20s linear infinite;
+    border-left-color: rgba(232, 201, 122, 0.4);
+}
+
+.ring2 {
+    width: 900px;
+    height: 900px;
+    animation: pulseRotate 30s linear infinite reverse;
+    border-right-color: rgba(232, 201, 122, 0.2);
+}
+
+.ring3 {
+    width: 1200px;
+    height: 1200px;
+    animation: pulseRotate 45s linear infinite;
+    border-bottom-color: rgba(232, 201, 122, 0.1);
+}
+
+@keyframes pulseRotate {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) rotate(180deg) scale(1.05);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg) scale(1);
+    }
+}
+
+.heroContent {
+    position: relative;
+    z-index: 10;
+    max-width: 800px;
+}
+
+.title {
+    font-size: clamp(48px, 8vw, 84px);
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    color: #f0ede8;
+    margin-bottom: 24px;
+}
+
+.highlight {
+    color: #e8c97a;
+    display: inline-block;
+    background: linear-gradient(135deg, #f0ede8 0%, #e8c97a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    font-size: 20px;
+    color: rgba(240, 237, 232, 0.7);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ===== CONTENT ===== */
+.contentSection {
+    padding: 100px 24px;
+    background: linear-gradient(to bottom, transparent, rgba(232, 201, 122, 0.02) 50%, transparent);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.textContent h2 {
+    font-size: 42px;
+    color: #f0ede8;
+    margin-bottom: 32px;
+    letter-spacing: -1px;
+}
+
+.textContent p {
+    font-size: 18px;
+    color: rgba(240, 237, 232, 0.7);
+    line-height: 1.8;
+    margin-bottom: 24px;
+}
+
+.imageWrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+}
+
+.logoImg {
+    position: relative;
+    z-index: 2;
+    object-fit: contain;
+}
+
+.imageGlow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    padding-bottom: 100%;
+    background: radial-gradient(circle, rgba(232, 201, 122, 0.15) 0%, transparent 70%);
+    z-index: 1;
+}
+
+/* ===== STATS ===== */
+.statsSection {
+    padding: 80px 24px 140px;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.statCard {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 48px 32px;
+    text-align: center;
+    transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.statCard:hover {
+    transform: translateY(-8px);
+    border-color: rgba(232, 201, 122, 0.3);
+    background: rgba(232, 201, 122, 0.02);
+}
+
+.statNumber {
+    font-size: 56px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    color: #e8c97a;
+    margin-bottom: 12px;
+}
+
+.statLabel {
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(240, 237, 232, 0.6);
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .statsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .textContent h2 {
+        font-size: 32px;
+    }
+}

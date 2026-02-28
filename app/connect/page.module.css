@@ -1,0 +1,188 @@
+.main {
+    min-height: 100vh;
+    background: #0a0a0a;
+    padding: 160px 24px 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 500px;
+    background: radial-gradient(circle at top center, rgba(232, 201, 122, 0.1) 0%, transparent 70%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 60px;
+    animation: fadeDown 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fadeDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.title {
+    font-size: clamp(48px, 6vw, 72px);
+    font-weight: 900;
+    letter-spacing: -2px;
+    color: #f0ede8;
+    margin-bottom: 20px;
+}
+
+.highlight {
+    color: #e8c97a;
+}
+
+.subtitle {
+    font-size: 18px;
+    color: rgba(240, 237, 232, 0.7);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ===== BENTO GRID ===== */
+.bentoGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.bentoCard {
+    position: relative;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 32px;
+    padding: 40px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: scaleUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes scaleUp {
+    0% {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.col1 {
+    grid-column: span 1;
+}
+
+.col2 {
+    grid-column: span 2;
+}
+
+.col3 {
+    grid-column: span 3;
+}
+
+.bentoCard:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(232, 201, 122, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.cardGlow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(232, 201, 122, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.bentoCard:hover .cardGlow {
+    opacity: 1;
+}
+
+.cardContent {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: 100%;
+}
+
+.iconWrapper {
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0a0a0a;
+    flex-shrink: 0;
+}
+
+.textWrapper h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #f0ede8;
+    margin-bottom: 4px;
+}
+
+.textWrapper p {
+    font-size: 15px;
+    color: rgba(240, 237, 232, 0.5);
+}
+
+.arrowIcon {
+    margin-left: auto;
+    color: rgba(240, 237, 232, 0.3);
+    transition: all 0.3s;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 50%;
+}
+
+.bentoCard:hover .arrowIcon {
+    color: #0a0a0a;
+    background: #e8c97a;
+    transform: translateX(8px);
+}
+
+@media (max-width: 900px) {
+    .bentoGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .col1,
+    .col2,
+    .col3 {
+        grid-column: span 1;
+    }
+}
