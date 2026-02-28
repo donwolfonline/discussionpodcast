@@ -11,7 +11,7 @@ function WaveBar({ index, mouseX }: { index: number, mouseX: number }) {
   const barRef = useRef<HTMLDivElement>(null);
   const [distance, setDistance] = useState(0);
 
-  const baseHeight = useMemo(() => (Math.sin(index * 0.5) * 30 + 50), [index]);
+  const baseHeight = useMemo(() => (Math.sin(index * 0.2) * 30 + 50), [index]);
   const baseDuration = useMemo(() => (0.8 + Math.abs(Math.cos(index)) * 0.4), [index]);
 
   useEffect(() => {
@@ -45,19 +45,22 @@ function SoundWave() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    const timer = setTimeout(() => setMounted(true), 0);
     const handleMouseMove = (e: MouseEvent) => {
       setMouseX(e.clientX);
     };
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      clearTimeout(timer);
+    };
   }, []);
 
   if (!mounted) return <div className={styles.soundWaveContainer} />;
 
   return (
     <div className={styles.soundWaveContainer}>
-      {[...Array(60)].map((_, i) => (
+      {[...Array(150)].map((_, i) => (
         <WaveBar key={i} index={i} mouseX={mouseX} />
       ))}
     </div>
