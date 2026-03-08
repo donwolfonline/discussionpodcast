@@ -1,188 +1,938 @@
+/* ===== MAIN ===== */
 .main {
     min-height: 100vh;
     background: #0a0a0a;
-    padding: 160px 24px 80px;
+    padding: 120px 24px 100px;
     position: relative;
     overflow: hidden;
 }
 
-.main::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw;
-    height: 500px;
-    background: radial-gradient(circle at top center, rgba(232, 201, 122, 0.1) 0%, transparent 70%);
-    z-index: 0;
+/* ===== ANIMATED BG ORBS ===== */
+.bgOrb1,
+.bgOrb2,
+.bgOrb3 {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
     pointer-events: none;
+    z-index: 0;
+    animation: orbFloat 12s ease-in-out infinite;
 }
 
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
+.bgOrb1 {
+    width: 600px;
+    height: 600px;
+    top: -200px;
+    left: -200px;
+    background: radial-gradient(circle, rgba(232, 201, 122, 0.07) 0%, transparent 70%);
+    animation-delay: 0s;
+}
+
+.bgOrb2 {
+    width: 500px;
+    height: 500px;
+    bottom: 100px;
+    right: -150px;
+    background: radial-gradient(circle, rgba(196, 165, 90, 0.06) 0%, transparent 70%);
+    animation-delay: -4s;
+}
+
+.bgOrb3 {
+    width: 400px;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(224, 92, 42, 0.04) 0%, transparent 70%);
+    animation-delay: -8s;
+}
+
+@keyframes orbFloat {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(40px, 30px) scale(1.05);
+    }
+
+    66% {
+        transform: translate(-20px, -20px) scale(0.95);
+    }
+}
+
+/* ===== HERO ===== */
+.hero {
+    max-width: 900px;
+    margin: 0 auto 80px;
+    text-align: center;
     position: relative;
     z-index: 10;
-}
-
-.header {
-    text-align: center;
-    margin-bottom: 60px;
-    animation: fadeDown 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: fadeDown 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes fadeDown {
-    0% {
+    from {
         opacity: 0;
-        transform: translateY(-30px);
+        transform: translateY(-32px);
     }
 
-    100% {
+    to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-.title {
-    font-size: clamp(48px, 6vw, 72px);
-    font-weight: 900;
-    letter-spacing: -2px;
-    color: #f0ede8;
-    margin-bottom: 20px;
-}
-
-.highlight {
+.heroBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(232, 201, 122, 0.08);
+    border: 1px solid rgba(232, 201, 122, 0.2);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
     color: #e8c97a;
+    margin-bottom: 28px;
 }
 
-.subtitle {
-    font-size: 18px;
-    color: rgba(240, 237, 232, 0.7);
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.6;
+.badgeDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #e8c97a;
+    animation: pulse 2s infinite;
 }
 
-/* ===== BENTO GRID ===== */
-.bentoGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(232, 201, 122, 0.7);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.2);
+        box-shadow: 0 0 0 6px rgba(232, 201, 122, 0);
+    }
 }
 
-.bentoCard {
-    position: relative;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 32px;
-    padding: 40px;
-    text-decoration: none;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    animation: scaleUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+.heroTitle {
+    font-size: clamp(52px, 7vw, 88px);
+    font-weight: 900;
+    letter-spacing: -3px;
+    line-height: 1.05;
+    color: #f0ede8;
+    margin-bottom: 24px;
 }
 
-@keyframes scaleUp {
+.heroGradient {
+    background: linear-gradient(135deg, #e8c97a 0%, #c4a55a 40%, #f0ede8 70%, #e8c97a 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShine 4s linear infinite;
+}
+
+@keyframes gradientShine {
     0% {
-        opacity: 0;
-        transform: scale(0.95) translateY(20px);
+        background-position: 0% center;
     }
 
     100% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
+        background-position: 200% center;
     }
 }
 
-.col1 {
-    grid-column: span 1;
+.heroSub {
+    font-size: 18px;
+    color: rgba(240, 237, 232, 0.55);
+    max-width: 580px;
+    margin: 0 auto 36px;
+    line-height: 1.7;
 }
 
-.col2 {
-    grid-column: span 2;
+.platformPills {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
-.col3 {
-    grid-column: span 3;
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(240, 237, 232, 0.6);
+    transition: all 0.3s;
 }
 
-.bentoCard:hover {
-    transform: translateY(-8px) scale(1.02);
-    border-color: rgba(232, 201, 122, 0.3);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+.pill:hover {
+    background: rgba(232, 201, 122, 0.08);
+    border-color: rgba(232, 201, 122, 0.25);
+    color: #e8c97a;
+    transform: translateY(-2px);
 }
 
-.cardGlow {
+/* ===== SOCIAL CARDS SECTION ===== */
+.cardsSection {
+    max-width: 1100px;
+    margin: 0 auto 100px;
+    position: relative;
+    z-index: 10;
+}
+
+.cardsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* ===== SOCIAL CARD ===== */
+.socialCard {
+    position: relative;
+    border-radius: 28px;
+    padding: 36px 32px 28px;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 280px;
+    border: 1px solid transparent;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.4s;
+    animation: cardReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes cardReveal {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Platform variants */
+.instagram_podcast {
+    background: linear-gradient(145deg, #1a1218 0%, #0f0c0f 100%);
+    border-color: rgba(131, 58, 180, 0.2);
+}
+
+.instagram_podcast:hover {
+    border-color: rgba(193, 53, 132, 0.4);
+    box-shadow: 0 30px 60px rgba(131, 58, 180, 0.2), 0 0 0 1px rgba(193, 53, 132, 0.2);
+    transform: translateY(-10px) scale(1.01);
+}
+
+.instagram_host {
+    background: linear-gradient(145deg, #1a1218 0%, #0f0c0f 100%);
+    border-color: rgba(240, 148, 51, 0.2);
+}
+
+.instagram_host:hover {
+    border-color: rgba(240, 148, 51, 0.4);
+    box-shadow: 0 30px 60px rgba(240, 148, 51, 0.15), 0 0 0 1px rgba(240, 148, 51, 0.2);
+    transform: translateY(-10px) scale(1.01);
+}
+
+.youtube {
+    background: linear-gradient(145deg, #1a1212 0%, #0f0a0a 100%);
+    border-color: rgba(255, 0, 0, 0.15);
+}
+
+.youtube:hover {
+    border-color: rgba(255, 80, 80, 0.35);
+    box-shadow: 0 30px 60px rgba(255, 0, 0, 0.15), 0 0 0 1px rgba(255, 80, 80, 0.2);
+    transform: translateY(-10px) scale(1.01);
+}
+
+/* Card animated bg */
+.cardBg {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, rgba(232, 201, 122, 0.1) 0%, transparent 70%);
+    inset: 0;
     opacity: 0;
-    transition: opacity 0.4s;
+    transition: opacity 0.5s;
+    border-radius: inherit;
 }
 
-.bentoCard:hover .cardGlow {
+.instagram_podcast .cardBg {
+    background: radial-gradient(ellipse at 30% 30%, rgba(131, 58, 180, 0.12) 0%, rgba(193, 53, 132, 0.06) 50%, transparent 70%);
+}
+
+.instagram_host .cardBg {
+    background: radial-gradient(ellipse at 30% 30%, rgba(240, 148, 51, 0.1) 0%, rgba(255, 220, 128, 0.05) 50%, transparent 70%);
+}
+
+.youtube .cardBg {
+    background: radial-gradient(ellipse at 30% 30%, rgba(255, 0, 0, 0.1) 0%, rgba(200, 40, 40, 0.05) 50%, transparent 70%);
+}
+
+.socialCard:hover .cardBg {
     opacity: 1;
 }
 
-.cardContent {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    height: 100%;
+/* Card floating orb */
+.cardOrb {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    top: -80px;
+    right: -60px;
+    filter: blur(60px);
+    opacity: 0.4;
+    transition: opacity 0.5s, transform 0.5s;
 }
 
-.iconWrapper {
-    width: 64px;
-    height: 64px;
+.instagram_podcast .cardOrb {
+    background: radial-gradient(circle, rgba(131, 58, 180, 0.5) 0%, transparent 70%);
+}
+
+.instagram_host .cardOrb {
+    background: radial-gradient(circle, rgba(240, 148, 51, 0.5) 0%, transparent 70%);
+}
+
+.youtube .cardOrb {
+    background: radial-gradient(circle, rgba(255, 0, 0, 0.5) 0%, transparent 70%);
+}
+
+.socialCard:hover .cardOrb {
+    opacity: 0.7;
+    transform: scale(1.3);
+}
+
+/* Platform badge */
+.platformBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid;
+    width: fit-content;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s;
+}
+
+.instagram_podcast .platformBadge {
+    color: #c47ee8;
+    border-color: rgba(196, 126, 232, 0.3);
+    background: rgba(196, 126, 232, 0.08);
+}
+
+.instagram_host .platformBadge {
+    color: #f0a435;
+    border-color: rgba(240, 164, 53, 0.3);
+    background: rgba(240, 164, 53, 0.08);
+}
+
+.youtube .platformBadge {
+    color: #ff5050;
+    border-color: rgba(255, 80, 80, 0.3);
+    background: rgba(255, 80, 80, 0.08);
+}
+
+/* Card body */
+.cardBody {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+}
+
+.cardIcon {
+    width: 68px;
+    height: 68px;
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.igIcon {
+    background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+    color: #fff;
+}
+
+.ytIcon {
+    background: #ff0000;
+    color: #fff;
+}
+
+.socialCard:hover .cardIcon {
+    transform: scale(1.12) rotate(-4deg);
+}
+
+.cardText {
+    flex: 1;
+}
+
+.cardTitle {
+    font-size: 18px;
+    font-weight: 700;
+    color: #f0ede8;
+    margin-bottom: 6px;
+    line-height: 1.2;
+}
+
+.cardHandle {
+    font-size: 14px;
+    color: rgba(240, 237, 232, 0.45);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-weight: 400;
+}
+
+/* Stats row */
+.statsRow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 14px 20px;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.statsVisible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stat {
+    flex: 1;
+    text-align: center;
+}
+
+.statValue {
+    display: block;
+    font-size: 20px;
+    font-weight: 800;
+    color: #e8c97a;
+}
+
+.statLabel {
+    display: block;
+    font-size: 11px;
+    color: rgba(240, 237, 232, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 2px;
+}
+
+.statDivider {
+    width: 1px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.07);
+    margin: 0 4px;
+}
+
+/* Card CTA */
+.cardCta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(240, 237, 232, 0.4);
+    transition: color 0.3s;
+}
+
+.socialCard:hover .cardCta {
+    color: #e8c97a;
+}
+
+.ctaArrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.socialCard:hover .ctaArrow {
+    background: #e8c97a;
+    border-color: #e8c97a;
     color: #0a0a0a;
+    transform: translateX(4px);
+}
+
+/* Ripple */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background: rgba(232, 201, 122, 0.3);
+    transform: translate(-50%, -50%) scale(0);
+    animation: rippleAnim 0.7s ease-out forwards;
+    pointer-events: none;
+    z-index: 5;
+}
+
+@keyframes rippleAnim {
+    to {
+        transform: translate(-50%, -50%) scale(50);
+        opacity: 0;
+    }
+}
+
+/* ===== FEED SECTION ===== */
+.feedSection {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+.feedSectionHeader {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.feedLiveIndicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(240, 237, 232, 0.5);
+    margin-bottom: 16px;
+}
+
+.liveDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.8);
+    animation: livePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 4px rgba(74, 222, 128, 0.8);
+    }
+
+    50% {
+        box-shadow: 0 0 16px rgba(74, 222, 128, 1), 0 0 32px rgba(74, 222, 128, 0.4);
+    }
+}
+
+.feedTitle {
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 900;
+    letter-spacing: -2px;
+    color: #f0ede8;
+    margin-bottom: 12px;
+}
+
+.feedSubtitle {
+    font-size: 16px;
+    color: rgba(240, 237, 232, 0.45);
+}
+
+/* ===== SCROLLING FEED TRACK ===== */
+.feedTrackWrapper {
+    position: relative;
+    margin-bottom: 64px;
+}
+
+.feedFadeLLeft,
+.feedFadeRight {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 120px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.feedFadeLLeft {
+    left: 0;
+    background: linear-gradient(to right, #0a0a0a 0%, transparent 100%);
+}
+
+.feedFadeRight {
+    right: 0;
+    background: linear-gradient(to left, #0a0a0a 0%, transparent 100%);
+}
+
+.feedTrack {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 8px 4px 16px;
+    cursor: grab;
+}
+
+.feedTrack::-webkit-scrollbar {
+    display: none;
+}
+
+.feedTrack:active {
+    cursor: grabbing;
+}
+
+/* ===== FEED CARD ===== */
+.feedCard {
+    flex: 0 0 300px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.feedCard:hover {
+    transform: translateY(-4px);
+    border-color: rgba(232, 201, 122, 0.2);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+
+.feedHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.feedAvatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 16px;
     flex-shrink: 0;
 }
 
-.textWrapper h2 {
-    font-size: 24px;
-    font-weight: 700;
+.feedMeta {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.feedAccount {
+    font-size: 13px;
+    font-weight: 600;
     color: #f0ede8;
-    margin-bottom: 4px;
 }
 
-.textWrapper p {
-    font-size: 15px;
-    color: rgba(240, 237, 232, 0.5);
+.feedTime {
+    font-size: 11px;
+    color: rgba(240, 237, 232, 0.35);
 }
 
-.arrowIcon {
-    margin-left: auto;
-    color: rgba(240, 237, 232, 0.3);
-    transition: all 0.3s;
-    padding: 12px;
-    background: rgba(255, 255, 255, 0.03);
+.feedPlatformBadge {
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.bentoCard:hover .arrowIcon {
-    color: #0a0a0a;
-    background: #e8c97a;
-    transform: translateX(8px);
+.ytBadge {
+    background: #ff0000;
+    color: #fff;
 }
 
-@media (max-width: 900px) {
-    .bentoGrid {
+.igBadge {
+    background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+    color: #fff;
+}
+
+/* YouTube thumbnail */
+.feedThumb {
+    width: 100%;
+    height: 170px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    background: #111;
+}
+
+.feedThumbImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.feedCard:hover .feedThumbImg {
+    transform: scale(1.05);
+}
+
+.ytPlayOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.35);
+    transition: background 0.3s;
+}
+
+.feedCard:hover .ytPlayOverlay {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.ytPlayCircle {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #ff0000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    box-shadow: 0 4px 24px rgba(255, 0, 0, 0.5);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.feedCard:hover .ytPlayCircle {
+    transform: scale(1.12);
+}
+
+/* Instagram quote card */
+.feedQuote {
+    position: relative;
+    background: linear-gradient(135deg, rgba(232, 201, 122, 0.08) 0%, rgba(196, 165, 90, 0.04) 100%);
+    border: 1px solid rgba(232, 201, 122, 0.15);
+    border-radius: 12px;
+    padding: 20px 18px 16px;
+    overflow: hidden;
+}
+
+.feedQuoteMark {
+    position: absolute;
+    top: -4px;
+    left: 12px;
+    font-size: 60px;
+    line-height: 1;
+    color: rgba(232, 201, 122, 0.25);
+    font-family: Georgia, serif;
+    pointer-events: none;
+}
+
+.feedQuoteText {
+    font-size: 13px;
+    font-style: italic;
+    color: rgba(240, 237, 232, 0.8);
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+    margin: 0;
+}
+
+.feedCaption {
+    font-size: 13px;
+    color: rgba(240, 237, 232, 0.6);
+    line-height: 1.55;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.feedFooter {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.feedLike {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: rgba(240, 237, 232, 0.4);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.feedLike:hover {
+    color: #fb7185;
+    transform: scale(1.05);
+}
+
+.feedLike.liked {
+    color: #fb7185;
+}
+
+.feedLike.liked svg {
+    animation: heartPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes heartPop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.4);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.feedComment {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: rgba(240, 237, 232, 0.35);
+}
+
+/* ===== EMBEDS ===== */
+.embedsRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.embedCard {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+.embedCard:hover {
+    border-color: rgba(232, 201, 122, 0.2);
+    transform: translateY(-4px);
+}
+
+.embedLabel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(240, 237, 232, 0.55);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.embedWrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    /* 16:9 */
+    background: #0f0f0f;
+}
+
+.embedIframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 960px) {
+    .cardsGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .cardsGrid>*:last-child {
+        grid-column: span 2;
+    }
+
+    .embedsRow {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .main {
+        padding: 110px 16px 80px;
+    }
+
+    .cardsGrid {
         grid-template-columns: 1fr;
     }
 
-    .col1,
-    .col2,
-    .col3 {
+    .cardsGrid>*:last-child {
         grid-column: span 1;
+    }
+
+    .heroTitle {
+        letter-spacing: -2px;
+    }
+
+    .feedCard {
+        flex: 0 0 260px;
     }
 }
