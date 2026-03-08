@@ -9,7 +9,8 @@ export default function Connect() {
     const { t } = useLanguage();
 
     useEffect(() => {
-        setMounted(true);
+        const timer = setTimeout(() => setMounted(true), 0);
+        return () => clearTimeout(timer);
     }, []);
 
     if (!mounted) return null;
